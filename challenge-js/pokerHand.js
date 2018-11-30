@@ -72,9 +72,20 @@ class PokerHand {
     return indexRanks.sort((a, b) => b - a);
   }
 
+  checkHandValidity(cardArray) {
+    let validity = cardArray.length === 5
+    return validity
+  }
   getRank() {
     // Implement poker hand ranking
+    if (typeof this.cards !== "string") {
+      return "Not a Valid Poker Hand. Please use one string of 5 cards in a rank/suit format such as: 'Ad 5h 3h 4h 10d'"
+    }
     let cardArray =  this.cards.split(" ");
+    let validity = this.checkHandValidity(cardArray);
+    if (!validity) {
+      return "Not a Valid Poker Hand. Please use one string of 5 cards in a rank/suit format such as: 'Ah 5h 3h 4h 10d'"
+    }
     let ranks = this.getRanks(cardArray);
     let suits = this.getSuits(cardArray);
     let indexRanks = this.getIndexRanks(ranks);
