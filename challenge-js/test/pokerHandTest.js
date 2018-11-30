@@ -91,3 +91,19 @@ describe('Rank High Card', function () {
     assert.equal(hand.getRank(), 'A is high card');
   });
 });
+
+describe('Edge Case - Non String', function () {
+  var hand = new PokerHand(['Ah 5h 3h 4h 10d']);
+
+  it('Returns helpful error message', function () {
+    assert.equal(hand.getRank(), "Not a Valid Poker Hand. Please use one string of 5 cards in a rank/suit format such as: 'Ad 5h 3h 4h 10d'");
+  });
+});
+
+describe('Edge Case - Wrong String Format', function () {
+  var hand = new PokerHand('Ah 5h 3h 4h');
+
+  it('Returns helpful error message', function () {
+    assert.equal(hand.getRank(), "Not a Valid Poker Hand. Please use one string of 5 cards in a rank/suit format such as: 'Ah 5h 3h 4h 10d'");
+  });
+});
